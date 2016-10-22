@@ -54,14 +54,22 @@
 		83F971771DBAC1960031EB7D /* CS193p_Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				83F971781DBAC1960031EB7D /* AppDelegate.swift */,
+				83F9718A1DBAF0990031EB7D /* Supporting Files */,
 				83F9717A1DBAC1960031EB7D /* ViewController.swift */,
 				83F9717C1DBAC1960031EB7D /* Main.storyboard */,
+			);
+			path = CS193p_Calculator;
+			sourceTree = "<group>";
+		};
+		83F9718A1DBAF0990031EB7D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				83F971781DBAC1960031EB7D /* AppDelegate.swift */,
 				83F9717F1DBAC1960031EB7D /* Assets.xcassets */,
 				83F971811DBAC1960031EB7D /* LaunchScreen.storyboard */,
 				83F971841DBAC1960031EB7D /* Info.plist */,
 			);
-			path = CS193p_Calculator;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +104,7 @@
 				TargetAttributes = {
 					83F971741DBAC1960031EB7D = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = A8HG2YSK5Z;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -260,6 +269,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = A8HG2YSK5Z;
 				INFOPLIST_FILE = CS193p_Calculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "WildCardProductions.CS193p-Calculator";
@@ -272,6 +282,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = A8HG2YSK5Z;
 				INFOPLIST_FILE = CS193p_Calculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "WildCardProductions.CS193p-Calculator";
