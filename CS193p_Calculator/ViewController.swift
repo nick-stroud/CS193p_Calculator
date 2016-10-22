@@ -42,6 +42,7 @@ class ViewController: UIViewController {
             model.performOperation(operationSymbol)
         }
         displayValue = model.result
+        userIsInTheMiddleOfTypingNumber = false
     }
     
     
