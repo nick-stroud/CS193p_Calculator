@@ -10,11 +10,21 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var display: UILabel!
-    var userIsInTheMiddleOfTypingNumber = false
+    private var displayValue: Double {
+        get {
+            return Double(display.text!)!
+        }
+        set {
+            display.text = String(newValue)
+        }
+    }
     
     
-    @IBAction func digitPressed(_ sender: UIButton) {
+    @IBOutlet private weak var display: UILabel!
+    private var userIsInTheMiddleOfTypingNumber = false
+    
+    
+    @IBAction private func digitPressed(_ sender: UIButton) {
         if userIsInTheMiddleOfTypingNumber{
         let digitPressed=sender.currentTitle!
         display.text = display.text! + digitPressed
@@ -23,6 +33,17 @@ class ViewController: UIViewController {
         }
         userIsInTheMiddleOfTypingNumber = true
     }
+    
+    private var model = CalculatorModel()
+    
+    @IBAction func performOperation(_ sender: UIButton) {
+        model.setQuantity(displayValue)
+        if let operationSymbol = sender.currentTitle {
+            model.performOperation(operationSymbol)
+        }
+        displayValue = model.result
+    }
+    
     
 }
 
