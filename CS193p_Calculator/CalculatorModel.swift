@@ -79,7 +79,7 @@ class CalculatorModel{
         }
     }
     
-    private func clear() {
+    func clear() {
         currentQuantity = 0.0
         pending = nil
         internalProgram.removeAll()
@@ -110,6 +110,32 @@ class CalculatorModel{
         
     }
     
+    var description: String {
+        get{
+            var descriptionBuild = ""
+            for item in internalProgram {
+                if let op = item as? String{
+                    if op != "=" {
+                        descriptionBuild.append(op)
+                        descriptionBuild.append(" ")
+                    }
+                } else if let value = item as? Double {
+                    descriptionBuild.append(String(value))
+                    descriptionBuild.append(" ")
+                }
+                
+            }
+            print("\(descriptionBuild)")
+            return descriptionBuild
+        }
+    }
+    
+    var isPartialResult: Bool {
+        get{
+            if (pending != nil) {return true}
+            else {return false}
+        }
+    }
     
     
 }

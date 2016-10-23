@@ -19,17 +19,28 @@ class ViewController: UIViewController {
         }
     }
     
-    
+    @IBOutlet private weak var descriptionDisplay: UILabel!
     @IBOutlet private weak var display: UILabel!
     private var userIsInTheMiddleOfTypingNumber = false
+    private var userIsTypingAfterTheDecimal = false
     
     
     @IBAction private func digitPressed(_ sender: UIButton) {
         if userIsInTheMiddleOfTypingNumber{
             let digitPressed=sender.currentTitle!
-            display.text = display.text! + digitPressed
+            if digitPressed != "." {
+                            display.text = display.text! + digitPressed
+            } else if !userIsTypingAfterTheDecimal {
+                display.text = display.text! + digitPressed
+                userIsTypingAfterTheDecimal = true
+            }
         } else {
-            display.text = sender.currentTitle
+            if sender.currentTitle == "." {
+                userIsTypingAfterTheDecimal = true
+                display.text = "0."
+            } else {
+                display.text = sender.currentTitle
+            }
         }
         userIsInTheMiddleOfTypingNumber = true
     }
@@ -42,7 +53,28 @@ class ViewController: UIViewController {
             model.performOperation(operationSymbol)
         }
         displayValue = model.result
+        self.descriptionText = model.description
         userIsInTheMiddleOfTypingNumber = false
+        userIsTypingAfterTheDecimal = false
+    }
+    
+    private var descriptionText: String {
+        get{
+            if (descriptionDisplay.text != nil) {
+                            return descriptionDisplay.text!
+            }else {
+                return "empty"
+            }
+        }
+        set{
+            var trailingDescriptor = "?"
+            if model.isPartialResult {
+                trailingDescriptor = "..."
+            } else {
+                trailingDescriptor = "="
+            }
+            descriptionDisplay.text = newValue.appending(trailingDescriptor)
+        }
     }
     
     private var storedProgram: CalculatorModel.PropertyList?
@@ -55,6 +87,14 @@ class ViewController: UIViewController {
             model.program = storedProgram!
             displayValue = model.result
         }
+    }
+    
+    @IBAction private func Clear() {
+        model.clear()
+        self.display.text = "0"
+        self.descriptionDisplay.text = "---"
+        userIsTypingAfterTheDecimal = false
+        userIsInTheMiddleOfTypingNumber = false
     }
 }
 
