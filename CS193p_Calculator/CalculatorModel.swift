@@ -9,12 +9,16 @@
 import Foundation
 
 class CalculatorModel{
+    private var currentQuantity = 0.0
+    private var internalProgram = [AnyObject]()
     
     //Function gives calculator quantity to be used for operation
     //Must be called before performing operation
     func setQuantity(_ quantity: Double){
         currentQuantity = quantity
+        internalProgram.append(quantity as AnyObject)
     }
+    
     
     private var operations: Dictionary<String,Operation> = [
         "π" : Operation.Constant(M_PI),
@@ -38,6 +42,7 @@ class CalculatorModel{
     //Must be called before geting the result
     func performOperation(_ symbol:String) {
         if let operation = operations[symbol]{
+            internalProgram.append(symbol as AnyObject)
             switch operation {
             case Operation.Constant(let value):
                 currentQuantity = value
@@ -69,11 +74,47 @@ class CalculatorModel{
     
     var result: Double {
         get{
-                return currentQuantity
+            return currentQuantity
             
         }
     }
     
-        private var currentQuantity = 0.0
+    private func clear() {
+        currentQuantity = 0.0
+        pending = nil
+        internalProgram.removeAll()
+    }
+    
+    typealias PropertyList = AnyObject
+    var program: PropertyList {
+        get {
+            return internalProgram as CalculatorModel.PropertyList
+        }
+        set {
+            clear()
+            if let arrayOfOps = newValue as? [AnyObject] {
+                for item in arrayOfOps {
+                    if let quantity = item as? Double {
+                        setQuantity(quantity)
+                    }
+                    if let operation = item as? String{
+                        performOperation(operation)
+                    }
+                        
+
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    
     
 }
+
+
+
+
+

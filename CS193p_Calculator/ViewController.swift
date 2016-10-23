@@ -26,8 +26,8 @@ class ViewController: UIViewController {
     
     @IBAction private func digitPressed(_ sender: UIButton) {
         if userIsInTheMiddleOfTypingNumber{
-        let digitPressed=sender.currentTitle!
-        display.text = display.text! + digitPressed
+            let digitPressed=sender.currentTitle!
+            display.text = display.text! + digitPressed
         } else {
             display.text = sender.currentTitle
         }
@@ -45,6 +45,16 @@ class ViewController: UIViewController {
         userIsInTheMiddleOfTypingNumber = false
     }
     
+    private var storedProgram: CalculatorModel.PropertyList?
+    @IBAction func save() {
+        storedProgram = model.program
+    }
     
+    @IBAction func retore() {
+        if storedProgram != nil {
+            model.program = storedProgram!
+            displayValue = model.result
+        }
+    }
 }
 
